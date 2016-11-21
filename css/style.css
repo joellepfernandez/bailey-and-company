@@ -1,3 +1,6 @@
-body {
-  background: green;
+nav {
+  background: pink;
+}
+.main_img {
+  background: url('http://www.jpfernandez.com/uploads/2/1/0/6/21061552/2938440_orig.jpg');
 }
