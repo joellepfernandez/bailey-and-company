@@ -1,6 +1,24 @@
 nav {
   background: pink;
 }
+
+ul{
+  list-style-type: none; //removes bullets
+  display: inline;
+  margin: 0; //removes browser default
+  padding: 0; //removess browser default
+}
+
+li {
+  float: left;
+}
+
+a {
+  display: block; //creates block around text so area around is clickable
+  padding: 8px; //creates space
+  background: tomato;
+
+}
 .main_img {
   background: url('http://www.jpfernandez.com/uploads/2/1/0/6/21061552/2938440_orig.jpg');
 }

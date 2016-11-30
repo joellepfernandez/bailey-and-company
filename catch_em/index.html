@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Catch 'Em</title>
+
+      <style media="screen">
+        #container {
+          border: 5px black solid;
+          position: absolute;
+          width: 97%;
+          margin: 0 auto;
+          box-shadow: 6px 4px 20px -8px rgba(0,0,0,0.75);
+        }
+        #game {
+          background: ivory;
+          border-right: 5px black solid;
+          width: 64.67%;
+          height: 500px;
+          margin: 0 auto;
+          display: inline-block;
+          float: left;
+        }
+        #console {
+          background: lightcyan;
+          width: 34.55%;
+          margin: 0 auto;
+          height: 500px;
+          display: inline-block;
+          float: left;
+          text-align: center;
+        }
+        .player, #timer, #score-history {
+          text-align: center;
+        }
+
+        #timer-countdown{
+          /*width:98%;*/
+          background: CornflowerBlue;
+          /*display: inline-block;
+          text-align: center;*/
+        }
+        #score-list{
+          /*width:98%;*/
+          background:lightsalmon;
+          /*display: inline-block;
+          text-align: center;*/
+        }
+        span {
+          font-weight: bold;
+        }
+        img {
+          width: 50px;
+        }
+        .clearfix:after {
+          visibility: hidden;
+          display: block;
+          content: " ";
+          clear: both;
+          height: 0;
+          font-size: 0;
+        }
+
+      </style>
+    </head>
+  <bodys>
+    <div id="container">
+      <!-- game -->
+      <div id="game">
+
+      </div>
+      <!-- right console -->
+      <div id="console">
+        <!-- player info -->
+        <div class="player">
+          <h2>Current Player Score:</h2>
+        </div>
+        <!-- game timer -->
+        <div id="timer">
+          <div id="timer-countdown">
+            <h1 id="the-time">60</h1>
+          </div>
+            <button id="fire">Start</button>
+        </div>
+        <!-- score history -->
+        <div id="score-history">
+          <h3>Score History</h3>
+            <div id="score-list">
+              <p><span>Joelle</span>     5</p>
+            </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"
+      integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    var theH1 = document.getElementById('the-time')
+    var theTime = theH1.innerText
+    var StartButton = $('#fire')
+
+///////////timer//////////
+    function countDown() {
+      if (theTime>0) {
+         theTime = theTime - 1
+       }
+       theH1.innerHTML = theTime
+        }
+      function startTimer (){
+        setInterval(countDown, 1000)
+      }
+
+      StartButton.on('click',  startTimer)
+///////////animation//////////
+    var dogTreat = $('<img src="./images/dog-treat.png"/>')
+    var theGame = $('#game')
+    // var newDogTreat = function () {
+    //   theGame.append(dogTreat)
+    //   setInterval(newDogTreat(), 2000)
+    // }
+    // var addTreats = theGame.append(dogTreat)
+    var newDogTreat
+    function addTreats() {
+      newDogTreat = setInterval(makeTreats, 1000)
+
+    }
+      function makeTreats(e) {
+        theGame.append(dogTreat)
+        console.log(e)
+        $(this).animate({left:'100px'})
+    }
+      StartButton.click(addTreats)
+
+
+  //     $makeTreats.animate({
+  //       top: genRandomNum(50,$(window).height()),
+  //       left: genRandomNum(50,$(window).width())
+  //     }, 10000, moveTreats)
+  //   }
+  //
+  //
+  // function moveTreats() {
+  //   $($makeTreats).animate({
+  //     top: genRandomNum(50,$(window).height()),
+  //     left: genRandomNum(50,$(window).width())
+  //   }, moveTreats)
+  // }
+  //
+  // function genRandomNum(min,max) {
+  //   return Math.round((Math.random() * (max - min)) + min)
+  // }
+
+    // create a var for dogTreat image
+    // animate the dogTreat image so it randomly moves around the screen
+    // create a loop so that it creates a dogTreat every 1 second
+
+//////////////// other code ///////////
+      // function yourDone () {
+      //   console.log("Time's Up!")
+      // }
+      //
+      // StartButton.click(function () {
+      //   console.log('Button got clicked!')
+      //   new Box ()
+      // })
+      //
+      // function Box() {
+      //   // $('body').append('<div style="background: blue; height:100px"></div>')
+      //   var $newBox = $('<div>').css({
+      //     height: genRandomNum(20,100),
+      //     width: genRandomNum(20,100), // objects get a ,
+      //     background: genRandomColor(),
+      //     position: 'absolute',
+      //   })
+      //
+      //   $('body').append($newBox)
+      //
+      //   $newBox.animate({
+      //     top: genRandomNum(50,$(window).height()),
+      //     left: genRandomNum(50,$(window).width())
+      //   }, 10000,moveBox)
+      // }
+      //
+      // function moveBox() {
+      //   $(this).animate({
+      //     top: genRandomNum(50,$(window).height()),
+      //     left: genRandomNum(50,$(window).width())
+      //   }, moveBox)
+      // }
+      //
+      // function genRandomNum(min,max) {
+      //   return Math.round((Math.random() * (max - min)) + min)
+      // }
+      //
+      // function genRandomColor() {
+      //   var options = ['A','B','C','D','E','F','0','1','2','3','4','5','6','7','8','9']
+      //
+      //   var result = "#"
+      //
+      //   for (var i = 0; i < 6; i+=1){ //random letter or number from array to make hexidecimal
+      //     result += options[genRandomNum(0,(options.length-1))]
+      //   }
+      //
+      //   return result
+      // }
+      //
+      //
+      // // /////adding image///
+      // // // var images = ['banner-1.jpg', 'banner-2.jpg', 'banner-3.jpg', 'banner-4.jpg'];
+      // // // $('<img class="fade-in" src="images/' + images[Math.floor(Math.random() * images.length)] + '">').appendTo('#banner-load');
+      // //
+      // // var circle = function Circle(x, y, r) {
+      // //     this.x = x;
+      // //     this.y = y;
+      // //     this.r = r;
+      // //
+      // //     this.translate = function(h, v) {
+      // //         this.x += h;
+      // //         this.y += v;
+      // //     };
+      // //
+      // //     this.intersect = function(circle) {
+      // //         var centerDistance = Math.pow(this.x - circle.x, 2) + Math.pow(this.y - circle.y, 2);
+      // //         return Math.pow(this.r - circle.r, 2) <= centerDistance && centerDistance <= Math.pow(this.r + cirle.r, 2);
+      // //     };
+      //
+      //       // var $newCircle = $('<div>').css({
+      //       //   height: genRandomNum(20,100),
+      //       //   width: genRandomNum(20,100), // objects get a ,
+      //       //   background: genRandomColor(),
+      //       //   position: 'absolute',
+      //       // })
+      //       //
+      //       // $('body').append($newCircle)
+      // // }
+
+
+    </script>
+  </body>
+</html>
