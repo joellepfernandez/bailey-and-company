@@ -33,7 +33,6 @@
         .player, #timer, #score-history {
           text-align: center;
         }
-
         #timer-countdown{
           /*width:98%;*/
           background: CornflowerBlue;
@@ -60,13 +59,11 @@
           height: 0;
           font-size: 0;
         }
-
         #game div {
           position:absolute;
           /*top: 0;
           left: 0;*/
         }
-
       </style>
     </head>
   <body>
@@ -104,7 +101,6 @@
     var theH1 = document.getElementById('the-time')
     var theTime = theH1.innerText
     var StartButton = $('#fire')
-
     ///////////timer//////////
     function countDown() {
         if (theTime > 0) {
@@ -112,40 +108,30 @@
         }
         theH1.innerHTML = theTime
     }
-
     function startTimer() {
         setInterval(countDown, 1000)
     }
-
     StartButton.on('click', startTimer)
         ///////////animation//////////
-
     //  for dogTreat image
     var theGame = $('#game') //theGame area
-    var imgs = ['treat', 'poison', 'toy']
+    var imgs = ['<div class="good"><img src="./images/dog-treat.png"/></div>', '<div class="bad"><img src="./images/chocolate.png"/></div>', '<div class="bad"><img src="./images/grapes.png"/></div>', '<div class="good"><img src="./images/kong.png"/></div>', '<div class="bad"><img src="./images/poop.png"/></div>','<div class="good"><img src="./images/tennis-ball.png"/></div>']
+    function DogTreat(div) {
 
-    function DogTreat(kind) {
-        var treatString = '<div class="' + kind + '"><img src="./images/dog-treat.png"/></div>' // create a var
-
-        theGame.append(treatString)
-
+        theGame.append(div)
         var thisTreat = $('#game div').last()
         thisTreat.css({
             top: genRandomNum(50, theGame.height()),
             left: genRandomNum(50, theGame.width()),
         })
-
         thisTreat.animate({
             top: genRandomNum(50, theGame.height()),
             left: genRandomNum(50, theGame.width()),
         }, 2000)
     }
-
     StartButton.click(addTreats)
-
     function addTreats() {
         var newDogTreat = setInterval(makeTreat, 1000)
-
         function makeTreat(e) {
             //makeTreats is the function of adding a dogTreat to the Game
             new DogTreat(imgs[Math.floor(Math.random() * (imgs.length))])
@@ -154,26 +140,18 @@
                 // create a loop so that it creates a dogTreat every 1 second
         }
 
-        // animate the dogTreat image so it randomly moves around the screen
-        function moveTreats() {
-
-        }
     }
-
     //random number generator
     function genRandomNum(min, max) {
         return Math.round((Math.random() * (max - min)) + min - 50)
     }
     ///////////click, score, remove//////////
-
-    $('body').on('click', '.treat', function() {
-            $(this).remove()
-        }) //click listener on dogTreat
+    $('body').on('click', '.good', function() { //click listener on good item
+            $(this).remove() //remove good item
+        })
         //add 1 point to score
-        //remove dogTreat
 
     ///////////move score to score history//////////
-
     ///////////move score to score history//////////    </script>
   </body>
 </html>
