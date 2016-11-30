@@ -127,7 +127,7 @@
       function makeTreats(e) {
         theGame.append(dogTreat)
         console.log(e)
-        $(this).animate({left:'100px'})
+        // $(this).animate({left:'100px'})
     }
       StartButton.click(addTreats)
 
@@ -146,9 +146,9 @@
   //   }, moveTreats)
   // }
   //
-  // function genRandomNum(min,max) {
-  //   return Math.round((Math.random() * (max - min)) + min)
-  // }
+  function genRandomNum(min,max) {
+    return Math.round((Math.random() * (max - min)) + min)
+  }
 
     // create a var for dogTreat image
     // animate the dogTreat image so it randomly moves around the screen

@@ -1,5 +1,5 @@
 Synopsis:
-Catch Em is a game
+Catch Em is a game that challenges players to catch as many dog treats as possible.
 
 Code Example
 
