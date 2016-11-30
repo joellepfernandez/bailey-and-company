@@ -61,9 +61,15 @@
           font-size: 0;
         }
 
+        #game div {
+          position:absolute;
+          /*top: 0;
+          left: 0;*/
+        }
+
       </style>
     </head>
-  <bodys>
+  <body>
     <div id="container">
       <!-- game -->
       <div id="game">
@@ -112,129 +118,61 @@
 
       StartButton.on('click',  startTimer)
 ///////////animation//////////
-    var dogTreat = $('<img src="./images/dog-treat.png"/>')
-    var theGame = $('#game')
-    // var newDogTreat = function () {
-    //   theGame.append(dogTreat)
-    //   setInterval(newDogTreat(), 2000)
-    // }
-    // var addTreats = theGame.append(dogTreat)
-    var newDogTreat
+
+//  for dogTreat image
+var theGame = $('#game') //theGame area
+var imgs = ['treat', 'poison', 'toy', 'mushroom']
+
+  function DogTreat(kind) {
+    var treatString = '<div class="' + kind + '"><img src="./images/dog-treat.png"/></div>' // create a var
+
+    theGame.append(treatString)
+
+    var thisTreat = $('#game div').last()
+    thisTreat.css({
+      top: genRandomNum(50,theGame.height()),
+      left: genRandomNum(50,theGame.width()),
+    })
+
+    thisTreat.animate({
+      top: genRandomNum(50,theGame.height()),
+      left: genRandomNum(50,theGame.width()),
+    }, 2000)
+  }
+
+    StartButton.click(addTreats)
+
     function addTreats() {
-      newDogTreat = setInterval(makeTreats, 1000)
-
-    }
-      function makeTreats(e) {
-        theGame.append(dogTreat)
+      var newDogTreat = setInterval(makeTreat, 1000)
+      function makeTreat(e) {
+      //makeTreats is the function of adding a dogTreat to the Game
+        new DogTreat(imgs[Math.floor(Math.random() * (imgs.length))])
         console.log(e)
-        // $(this).animate({left:'100px'})
+      //references the function makeTreats to append a dogTreat every second
+      // create a loop so that it creates a dogTreat every 1 second
     }
-      StartButton.click(addTreats)
 
+    // animate the dogTreat image so it randomly moves around the screen
+        function moveTreats() {
 
-  //     $makeTreats.animate({
-  //       top: genRandomNum(50,$(window).height()),
-  //       left: genRandomNum(50,$(window).width())
-  //     }, 10000, moveTreats)
-  //   }
-  //
-  //
-  // function moveTreats() {
-  //   $($makeTreats).animate({
-  //     top: genRandomNum(50,$(window).height()),
-  //     left: genRandomNum(50,$(window).width())
-  //   }, moveTreats)
-  // }
-  //
+        }
+    }
+
+    //random number generator
   function genRandomNum(min,max) {
     return Math.round((Math.random() * (max - min)) + min)
   }
+///////////click, score, remove//////////
 
-    // create a var for dogTreat image
-    // animate the dogTreat image so it randomly moves around the screen
-    // create a loop so that it creates a dogTreat every 1 second
+$('body').on('click', '.treat', function(){
+  $(this).remove()
+})//click listener on dogTreat
+//add 1 point to score
+//remove dogTreat
 
-//////////////// other code ///////////
-      // function yourDone () {
-      //   console.log("Time's Up!")
-      // }
-      //
-      // StartButton.click(function () {
-      //   console.log('Button got clicked!')
-      //   new Box ()
-      // })
-      //
-      // function Box() {
-      //   // $('body').append('<div style="background: blue; height:100px"></div>')
-      //   var $newBox = $('<div>').css({
-      //     height: genRandomNum(20,100),
-      //     width: genRandomNum(20,100), // objects get a ,
-      //     background: genRandomColor(),
-      //     position: 'absolute',
-      //   })
-      //
-      //   $('body').append($newBox)
-      //
-      //   $newBox.animate({
-      //     top: genRandomNum(50,$(window).height()),
-      //     left: genRandomNum(50,$(window).width())
-      //   }, 10000,moveBox)
-      // }
-      //
-      // function moveBox() {
-      //   $(this).animate({
-      //     top: genRandomNum(50,$(window).height()),
-      //     left: genRandomNum(50,$(window).width())
-      //   }, moveBox)
-      // }
-      //
-      // function genRandomNum(min,max) {
-      //   return Math.round((Math.random() * (max - min)) + min)
-      // }
-      //
-      // function genRandomColor() {
-      //   var options = ['A','B','C','D','E','F','0','1','2','3','4','5','6','7','8','9']
-      //
-      //   var result = "#"
-      //
-      //   for (var i = 0; i < 6; i+=1){ //random letter or number from array to make hexidecimal
-      //     result += options[genRandomNum(0,(options.length-1))]
-      //   }
-      //
-      //   return result
-      // }
-      //
-      //
-      // // /////adding image///
-      // // // var images = ['banner-1.jpg', 'banner-2.jpg', 'banner-3.jpg', 'banner-4.jpg'];
-      // // // $('<img class="fade-in" src="images/' + images[Math.floor(Math.random() * images.length)] + '">').appendTo('#banner-load');
-      // //
-      // // var circle = function Circle(x, y, r) {
-      // //     this.x = x;
-      // //     this.y = y;
-      // //     this.r = r;
-      // //
-      // //     this.translate = function(h, v) {
-      // //         this.x += h;
-      // //         this.y += v;
-      // //     };
-      // //
-      // //     this.intersect = function(circle) {
-      // //         var centerDistance = Math.pow(this.x - circle.x, 2) + Math.pow(this.y - circle.y, 2);
-      // //         return Math.pow(this.r - circle.r, 2) <= centerDistance && centerDistance <= Math.pow(this.r + cirle.r, 2);
-      // //     };
-      //
-      //       // var $newCircle = $('<div>').css({
-      //       //   height: genRandomNum(20,100),
-      //       //   width: genRandomNum(20,100), // objects get a ,
-      //       //   background: genRandomColor(),
-      //       //   position: 'absolute',
-      //       // })
-      //       //
-      //       // $('body').append($newCircle)
-      // // }
+///////////move score to score history//////////
 
-
+///////////move score to score history//////////
     </script>
   </body>
 </html>
