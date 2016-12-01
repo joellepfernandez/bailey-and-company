@@ -116,7 +116,7 @@
             <h1 id="the-time">10</h1>
           </div>
             <button id="fire">Start</button>
-            <button id="clear">Clear</button>
+            <!-- <button id="clear">Clear</button> -->
         </div>
         <!-- score history -->
         <div id="score-history">
@@ -138,7 +138,7 @@
                 score: 0
             }
         }
-
+        var timeLimit = 10
         var currentPlayer = game.player2
         var theH1 = document.getElementById('the-time')
         var theTime = theH1.innerText
@@ -150,8 +150,18 @@
         function startTimer() {
             countDownIntervalId = setInterval(countDown, 1000) //timer counts down by second
             // clearGameBoard()
+            clearGameBoard()
             addItems()
             switchTurns() //when the clear button is clicked the turns are switched
+            $('body').on('click', '.object', function() { //click listener on good item
+                    $(this).remove() //remove good item
+                    if ($(this).hasClass('good')) {
+                        currentPlayer.score += 1
+                    } else {
+                        currentPlayer.score -= 2
+                    }
+                    $('#current_score').html(currentPlayer.score) //add 1 point to score
+            })
         }
 
         function countDown() {
@@ -161,9 +171,11 @@
                 clearInterval(animationIntervalId) //if the timer is 0 stop the animation
                 clearInterval(countDownIntervalId)
                 $('body').off('click', '.object') // if the timer is 0 turn off scoring ability
-                scoreHistory.append(currentPlayer.score) // add the current player's score to Score History
-                ///once timer hits 0 log score in score history with player nam
+                scoreHistory.append(currentPlayer.scores) // add the current player's score to Score History
+                $('#current_score').html('0')
+                theTime = timeLimit///once timer hits 0 log score in score history with player nam
                 //restart timer with start button
+                // clearGameBoard()
             }
             theH1.innerHTML = theTime
         }
@@ -203,24 +215,16 @@
             return Math.round((Math.random() * (max - min)) + min - 50)
         }
         ///////////click, score, remove//////////
-        $('body').on('click', '.object', function() { //click listener on good item
-                $(this).remove() //remove good item
-                if ($(this).hasClass('good')) {
-                    currentPlayer.score += 1
-                } else {
-                    currentPlayer.score -= 2
-                }
-                $('#current_score').html(currentPlayer.score) //add 1 point to score
-            })
-            ///////////restart game///////////
-            $('#clear').on('click', function(){
-              clearGameBoard() //when the clear button is clicked it clears the game board
 
-            })
+            ///////////restart game///////////
+            // $('#clear').on('click', function(){
+            //   clearGameBoard() //when the clear button is clicked it clears the game board
+            //
+            // })
 
             function clearGameBoard() {
               theGame.html('')
-              $('#current_score').html('0')
+              // $('#current_score').html('0')
             }
         ///////////switch players///////////
         // if it's player 1's turn, make currentPlayer game.player2, and vice versa:
