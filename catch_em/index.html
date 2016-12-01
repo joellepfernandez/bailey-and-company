@@ -76,7 +76,7 @@
       <div id="console">
         <!-- player info -->
         <div class="player">
-          <h2>Current Player Score:</h2>
+          <h2>Current Player Score:<span id="current_score">0<span></h2>
         </div>
         <!-- game timer -->
         <div id="timer">
@@ -98,6 +98,14 @@
       integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
       crossorigin="anonymous"></script>
     <script type="text/javascript">
+    var animationIntervalId;
+    var game = {
+      player1: {score: 0},
+      player2: {score: 0}
+    }
+
+    var currentPlayer = game.player1
+
     var theH1 = document.getElementById('the-time')
     var theTime = theH1.innerText
     var StartButton = $('#fire')
@@ -105,6 +113,8 @@
     function countDown() {
         if (theTime > 0) {
             theTime = theTime - 1
+        } else {
+          clearInterval(animationIntervalId)
         }
         theH1.innerHTML = theTime
     }
@@ -113,9 +123,8 @@
     }
     StartButton.on('click', startTimer)
         ///////////animation//////////
-    //  for dogTreat image
     var theGame = $('#game') //theGame area
-    var imgs = ['<div class="good"><img src="./images/dog-treat.png"/></div>', '<div class="bad"><img src="./images/chocolate.png"/></div>', '<div class="bad"><img src="./images/grapes.png"/></div>', '<div class="good"><img src="./images/kong.png"/></div>', '<div class="bad"><img src="./images/poop.png"/></div>','<div class="good"><img src="./images/tennis-ball.png"/></div>']
+    var imgs = ['<div class="good object"><img src="./images/dog-treat.png"/></div>', '<div class="bad object"><img src="./images/chocolate.png"/></div>', '<div class="bad object"><img src="./images/grapes.png"/></div>', '<div class="good object"><img src="./images/kong.png"/></div>', '<div class="bad object"><img src="./images/poop.png"/></div>','<div class="good object"><img src="./images/tennis-ball.png"/></div>']
     function DogTreat(div) {
 
         theGame.append(div)
@@ -132,6 +141,7 @@
     StartButton.click(addTreats)
     function addTreats() {
         var newDogTreat = setInterval(makeTreat, 1000)
+        animationIntervalId = newDogTreat
         function makeTreat(e) {
             //makeTreats is the function of adding a dogTreat to the Game
             new DogTreat(imgs[Math.floor(Math.random() * (imgs.length))])
@@ -139,18 +149,33 @@
                 //references the function makeTreats to append a dogTreat every second
                 // create a loop so that it creates a dogTreat every 1 second
         }
-
     }
     //random number generator
     function genRandomNum(min, max) {
         return Math.round((Math.random() * (max - min)) + min - 50)
     }
     ///////////click, score, remove//////////
-    $('body').on('click', '.good', function() { //click listener on good item
+    $('body').on('click', '.object', function() { //click listener on good item
             $(this).remove() //remove good item
+            if( $(this).hasClass('good')) {
+              currentPlayer.score += 1
+            } else {
+              currentPlayer.score -= 2
+            }
+            $('#current_score').html(currentPlayer.score)//add 1 point to score
         })
-        //add 1 point to score
 
+    ///////////stop animation and clicking when timer runs out//////////
+
+    ///////////switch players///////////
+        // if it's player 1's turn, make currentPlayer game.player2, and vice versa:
+         function switchTurns() {
+           if(currentPlayer == game.player1) {
+             currentPlayer = game.player2
+           } else {
+             currentPlayer = game.player1
+           }
+         }
     ///////////move score to score history//////////
     ///////////move score to score history//////////    </script>
   </body>
