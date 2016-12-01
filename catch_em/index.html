@@ -115,6 +115,7 @@
             theTime = theTime - 1
         } else {
           clearInterval(animationIntervalId)
+          $('body').off('click', '.object')
         }
         theH1.innerHTML = theTime
     }
@@ -164,9 +165,6 @@
             }
             $('#current_score').html(currentPlayer.score)//add 1 point to score
         })
-
-    ///////////stop animation and clicking when timer runs out//////////
-
     ///////////switch players///////////
         // if it's player 1's turn, make currentPlayer game.player2, and vice versa:
          function switchTurns() {
@@ -177,6 +175,6 @@
            }
          }
     ///////////move score to score history//////////
-    ///////////move score to score history//////////    </script>
+       </script>
   </body>
 </html>
