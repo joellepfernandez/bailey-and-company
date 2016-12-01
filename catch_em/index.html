@@ -3,47 +3,77 @@
   <head>
     <meta charset="utf-8">
     <title>Catch 'Em</title>
-
-      <style media="screen">
+    <link href="https://fonts.googleapis.com/css?family=Arvo|Bitter|Pacifico" rel="stylesheet">
+    <style>
+       body{
+         margin : 0 auto;
+         /*text-align: center;
+         display: inline-block;*/
+         width: 100%;
+       }
+       .main-title {
+          text-align: center;
+          font-family: 'Pacifico', cursive;
+          font-size: 300%;
+          padding-bottom: 0px;
+          margin-bottom: -24px;
+        }
+        .subtitle{
+          font-family: 'Arvo', serif;
+          text-align: center;
+        }
         #container {
-          border: 5px black solid;
+          border: 5px slategrey solid;
           position: absolute;
           width: 97%;
-          margin: 0 auto;
+          margin: 0 10px;
           box-shadow: 6px 4px 20px -8px rgba(0,0,0,0.75);
+          border-radius: 30px;
         }
         #game {
           background: ivory;
-          border-right: 5px black solid;
+          border-right: 5px slategrey solid;
           width: 64.67%;
           height: 500px;
           margin: 0 auto;
-          display: inline-block;
+          /*display: inline-block;*/
           float: left;
+          border-radius: 30px 0 0 30px ;
+          /*position: relative;*/
         }
         #console {
-          background: lightcyan;
           width: 34.55%;
           margin: 0 auto;
           height: 500px;
-          display: inline-block;
+          /*display: inline-block;*/
           float: left;
           text-align: center;
+          border-radius: 0 30px 30px 0;
+          position: relative;
         }
         .player, #timer, #score-history {
           text-align: center;
+          font-family: 'Arvo', serif;
         }
         #timer-countdown{
           /*width:98%;*/
-          background: CornflowerBlue;
+          /*background: CornflowerBlue;*/
           /*display: inline-block;
           text-align: center;*/
         }
+        #score-history, #timer-countdown {
+          border-top: 1px black dotted;
+          margin-top: 14px;
+        }
         #score-list{
           /*width:98%;*/
-          background:lightsalmon;
+          /*background:lightsalmon;*/
           /*display: inline-block;
           text-align: center;*/
+        }
+        .player-name {
+          color: blue;
+          font-weight: bold;
         }
         span {
           font-weight: bold;
@@ -67,6 +97,8 @@
       </style>
     </head>
   <body>
+    <h1 class="main-title">Catch Em</h1>
+    <h3 class="subtitle">Test your knowledge of what is good and not so good for your pup!</h3>
     <div id="container">
       <!-- game -->
       <div id="game">
@@ -76,105 +108,131 @@
       <div id="console">
         <!-- player info -->
         <div class="player">
-          <h2>Current Player Score:<span id="current_score">0<span></h2>
+          <h3 class="current-player-display">Current Player's Score:</h3><h3><span id="current_score"> 0<span></h3>
         </div>
         <!-- game timer -->
         <div id="timer">
           <div id="timer-countdown">
-            <h1 id="the-time">60</h1>
+            <h1 id="the-time">10</h1>
           </div>
             <button id="fire">Start</button>
+            <button id="clear">Clear</button>
         </div>
         <!-- score history -->
         <div id="score-history">
           <h3>Score History</h3>
             <div id="score-list">
-              <p><span>Joelle</span>     5</p>
+              <p><span class="player-name">Joelle</span>     5</p>
             </div>
         </div>
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.1.1.js"
-      integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
-      crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
     <script type="text/javascript">
-    var animationIntervalId;
-    var game = {
-      player1: {score: 0},
-      player2: {score: 0}
-    }
-
-    var currentPlayer = game.player1
-
-    var theH1 = document.getElementById('the-time')
-    var theTime = theH1.innerText
-    var StartButton = $('#fire')
-    ///////////timer//////////
-    function countDown() {
-        if (theTime > 0) {
-            theTime = theTime - 1
-        } else {
-          clearInterval(animationIntervalId)
-          $('body').off('click', '.object')
-        }
-        theH1.innerHTML = theTime
-    }
-    function startTimer() {
-        setInterval(countDown, 1000)
-    }
-    StartButton.on('click', startTimer)
-        ///////////animation//////////
-    var theGame = $('#game') //theGame area
-    var imgs = ['<div class="good object"><img src="./images/dog-treat.png"/></div>', '<div class="bad object"><img src="./images/chocolate.png"/></div>', '<div class="bad object"><img src="./images/grapes.png"/></div>', '<div class="good object"><img src="./images/kong.png"/></div>', '<div class="bad object"><img src="./images/poop.png"/></div>','<div class="good object"><img src="./images/tennis-ball.png"/></div>']
-    function DogTreat(div) {
-
-        theGame.append(div)
-        var thisTreat = $('#game div').last()
-        thisTreat.css({
-            top: genRandomNum(50, theGame.height()),
-            left: genRandomNum(50, theGame.width()),
-        })
-        thisTreat.animate({
-            top: genRandomNum(50, theGame.height()),
-            left: genRandomNum(50, theGame.width()),
-        }, 2000)
-    }
-    StartButton.click(addTreats)
-    function addTreats() {
-        var newDogTreat = setInterval(makeTreat, 1000)
-        animationIntervalId = newDogTreat
-        function makeTreat(e) {
-            //makeTreats is the function of adding a dogTreat to the Game
-            new DogTreat(imgs[Math.floor(Math.random() * (imgs.length))])
-            console.log(e)
-                //references the function makeTreats to append a dogTreat every second
-                // create a loop so that it creates a dogTreat every 1 second
-        }
-    }
-    //random number generator
-    function genRandomNum(min, max) {
-        return Math.round((Math.random() * (max - min)) + min - 50)
-    }
-    ///////////click, score, remove//////////
-    $('body').on('click', '.object', function() { //click listener on good item
-            $(this).remove() //remove good item
-            if( $(this).hasClass('good')) {
-              currentPlayer.score += 1
-            } else {
-              currentPlayer.score -= 2
+        var animationIntervalId;
+        var game = {
+            player1: {
+                score: 0
+            },
+            player2: {
+                score: 0
             }
-            $('#current_score').html(currentPlayer.score)//add 1 point to score
-        })
-    ///////////switch players///////////
+        }
+
+        var currentPlayer = game.player2
+        var theH1 = document.getElementById('the-time')
+        var theTime = theH1.innerText
+        var StartButton = $('#fire')
+        var currentPlayerDisplay = $('.current-player-display')
+        var scoreHistory = $('#score-list')
+            ///////////timer//////////
+        StartButton.on('click', startTimer) //click on the start button to begin timer
+        function startTimer() {
+            countDownIntervalId = setInterval(countDown, 1000) //timer counts down by second
+            // clearGameBoard()
+            addItems()
+            switchTurns() //when the clear button is clicked the turns are switched
+        }
+
+        function countDown() {
+            if (theTime > 0) { //if the timer is greater than 0 continue subtracting 1 second
+                theTime = theTime - 1
+            } else {
+                clearInterval(animationIntervalId) //if the timer is 0 stop the animation
+                clearInterval(countDownIntervalId)
+                $('body').off('click', '.object') // if the timer is 0 turn off scoring ability
+                scoreHistory.append(currentPlayer.score) // add the current player's score to Score History
+                ///once timer hits 0 log score in score history with player nam
+                //restart timer with start button
+            }
+            theH1.innerHTML = theTime
+        }
+
+            ///////////animation//////////
+        var theGame = $('#game') //theGame area
+        var imgs = ['<div class="good object"><img src="./images/dog-treat.png"/></div>', '<div class="bad object"><img src="./images/chocolate.png"/></div>', '<div class="bad object"><img src="./images/grapes.png"/></div>', '<div class="good object"><img src="./images/kong.png"/></div>', '<div class="bad object"><img src="./images/poop.png"/></div>', '<div class="good object"><img src="./images/tennis-ball.png"/></div>', '<div class="good object"><img src="./images/carrot.png"/></div>', '<div class="bad object"><img src="./images/beer.png"/></div>', '<div class="good object"><img src="./images/strawberry.png"/></div>', '<div class="good object"><img src="./images/blueberry.png"/></div>', '<div class="bad object"><img src="./images/tomato.png"/></div>', '<div class="bad object"><img src="./images/mushroom.png"/></div>', '<div class="good object"><img src="./images/spinach.png"/></div>']
+
+        function DogItem(div) {
+
+            theGame.append(div)
+            var thisItem = $('#game div').last()
+            thisItem.css({
+                top: genRandomNum(50, theGame.height()),
+                left: genRandomNum(50, theGame.width()),
+            })
+            thisItem.animate({
+                top: genRandomNum(50, theGame.height()),
+                left: genRandomNum(50, theGame.width()),
+            }, 2000)
+        }
+
+        function addItems() {
+            var newDogItem = setInterval(makeItem, 100)
+            animationIntervalId = newDogItem
+
+            function makeItem(e) {
+                //makeTreats is the function of adding a dogTreat to the Game
+                new DogItem(imgs[Math.floor(Math.random() * (imgs.length))])
+                console.log(e)
+                    //references the function makeTreats to append a dogTreat every second
+                    // create a loop so that it creates a dogTreat every 1 second
+            }
+        }
+        //random number generator
+        function genRandomNum(min, max) {
+            return Math.round((Math.random() * (max - min)) + min - 50)
+        }
+        ///////////click, score, remove//////////
+        $('body').on('click', '.object', function() { //click listener on good item
+                $(this).remove() //remove good item
+                if ($(this).hasClass('good')) {
+                    currentPlayer.score += 1
+                } else {
+                    currentPlayer.score -= 2
+                }
+                $('#current_score').html(currentPlayer.score) //add 1 point to score
+            })
+            ///////////restart game///////////
+            $('#clear').on('click', function(){
+              clearGameBoard() //when the clear button is clicked it clears the game board
+
+            })
+
+            function clearGameBoard() {
+              theGame.html('')
+              $('#current_score').html('0')
+            }
+        ///////////switch players///////////
         // if it's player 1's turn, make currentPlayer game.player2, and vice versa:
-         function switchTurns() {
-           if(currentPlayer == game.player1) {
-             currentPlayer = game.player2
-           } else {
-             currentPlayer = game.player1
-           }
-         }
-    ///////////move score to score history//////////
-       </script>
+        function switchTurns() {
+            if (currentPlayer == game.player2) {
+                currentPlayer = game.player1
+            } else {
+                currentPlayer = game.player2
+            }
+        }
+
+
+    </script>
   </body>
 </html>
