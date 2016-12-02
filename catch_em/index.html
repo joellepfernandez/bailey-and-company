@@ -119,7 +119,7 @@
             <h1 id="the-time">5</h1>
           </div>
             <button id="fire">Start</button>
-            <!-- <button id="clear">Clear</button> -->
+            <button id="check-for-winner">Find Winner</button>
         </div>
         <!-- score history -->
         <div id="score-history">
@@ -142,17 +142,28 @@
             //     score: 0
             // }
         }
+        //game.players = [] // push players into array
 
         var timeLimit = 5
         var currentPlayer = game.player2
         var theH1 = document.getElementById('the-time')
         var theTime = theH1.innerText
         var StartButton = $('#fire')
+        var CheckButton = $('#check-for-winner')
         var currentPlayerDisplay = $('.current-player-display')
         var currentPlayerName = $('input').val() //input value
         var scoreHistory = $('#score-list')
+        var scores = []
             ///////////timer//////////
         StartButton.on('click', startTimer) //click on the start button to begin timer
+        CheckButton.on('click', function checkForWinner(){
+                  scores.sort(function(a,b){
+                    return b.score-a.score})
+
+                    var i = 0
+                    alert("The winner is: " + scores[i].name + "!")
+                })
+
         function saveCurrentPlayer(){
           currentPlayerName = $('input').val()
         }
@@ -181,7 +192,10 @@
                 clearInterval(animationIntervalId) //if the timer is 0 stop the animation
                 clearInterval(countDownIntervalId)
                 $('body').off('click', '.object') // if the timer is 0 turn off scoring ability
-                scoreHistory.append('<p data-banana="gwar" data-score="' + game.player.score + '"><span class="player-name">' + currentPlayerName + "</span>: " + game.player.score + '</p>') // add the current player's score to Score History
+                scoreHistory.append('<p data-score="' + game.player.score + '"><span class="player-name">' + currentPlayerName + "</span>: " + game.player.score + '</p>') // add the current player's score to Score History
+
+                scores.push({name: currentPlayerName , score:  +  $('#score-list p').last().data('score')})
+
 
                 theTime = timeLimit
                 $('input').val('')
@@ -247,6 +261,11 @@
                 currentPlayer = game.player2
             }
         }
+///
+//   function checkForWinner(){
+//    scores.sort(function(a, b){return b-a})
+//    console.log('order list is : ' + scores )
+// }
 
 
     </script>
