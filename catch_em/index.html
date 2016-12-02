@@ -125,7 +125,6 @@
         <div id="score-history">
           <h3>Score History</h3>
             <div id="score-list">
-              <p><span class="player-name">Joelle</span>     5</p>
             </div>
         </div>
       </div>
@@ -182,9 +181,10 @@
                 clearInterval(animationIntervalId) //if the timer is 0 stop the animation
                 clearInterval(countDownIntervalId)
                 $('body').off('click', '.object') // if the timer is 0 turn off scoring ability
-                scoreHistory.append('<p>' + currentPlayerName + ": " + game.player.score + '</p>') // add the current player's score to Score History
+                scoreHistory.append('<p><span class="player-name">' + currentPlayerName + "</span>: " + game.player.score + '</p>') // add the current player's score to Score History
 
                 theTime = timeLimit
+                $('input').val('')
                 $('#current_score').html('0')
 
             }
