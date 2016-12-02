@@ -108,7 +108,10 @@
       <div id="console">
         <!-- player info -->
         <div class="player">
-          <h3 class="current-player-display">Current Player's Score:</h3><h3><span id="current_score"> 0<span></h3>
+          <h3 class="current-player-display">Current Player:
+            <input id="current_player_name"></input>
+          </h3>
+          <h3>Score: <span id="current_score"> 0<span></h3>
         </div>
         <!-- game timer -->
         <div id="timer">
@@ -131,23 +134,31 @@
     <script type="text/javascript">
         var animationIntervalId;
         var game = {
-            player1: {
-                score: 0
-            },
-            player2: {
+            player: {
+                name: currentPlayerName,
                 score: 0
             }
+            // ,
+            // player2: {
+            //     score: 0
+            // }
         }
+
         var timeLimit = 10
         var currentPlayer = game.player2
         var theH1 = document.getElementById('the-time')
         var theTime = theH1.innerText
         var StartButton = $('#fire')
         var currentPlayerDisplay = $('.current-player-display')
+        var currentPlayerName = $('input').val() //input value
         var scoreHistory = $('#score-list')
             ///////////timer//////////
         StartButton.on('click', startTimer) //click on the start button to begin timer
+        function saveCurrentPlayer(){
+          currentPlayerName = $('input').val()
+        }
         function startTimer() {
+            saveCurrentPlayer()
             countDownIntervalId = setInterval(countDown, 1000) //timer counts down by second
             // clearGameBoard()
             clearGameBoard()
@@ -156,11 +167,11 @@
             $('body').on('click', '.object', function() { //click listener on good item
                     $(this).remove() //remove good item
                     if ($(this).hasClass('good')) {
-                        currentPlayer.score += 1
+                        game.player.score += 1
                     } else {
-                        currentPlayer.score -= 2
+                        game.player.score -= 2
                     }
-                    $('#current_score').html(currentPlayer.score) //add 1 point to score
+                    $('#current_score').html(game.player.score) //add 1 point to score
             })
         }
 
@@ -171,11 +182,11 @@
                 clearInterval(animationIntervalId) //if the timer is 0 stop the animation
                 clearInterval(countDownIntervalId)
                 $('body').off('click', '.object') // if the timer is 0 turn off scoring ability
-                scoreHistory.append(currentPlayer.scores) // add the current player's score to Score History
+                scoreHistory.append('<p>' + currentPlayerName + ": " + game.player.score + '</p>') // add the current player's score to Score History
+
+                theTime = timeLimit
                 $('#current_score').html('0')
-                theTime = timeLimit///once timer hits 0 log score in score history with player nam
-                //restart timer with start button
-                // clearGameBoard()
+
             }
             theH1.innerHTML = theTime
         }

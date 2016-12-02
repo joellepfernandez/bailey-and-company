@@ -11,13 +11,18 @@ ul{
 
 li {
   float: left;
+  display: block;
 }
 
 a {
   display: block; //creates block around text so area around is clickable
   padding: 8px; //creates space
   background: tomato;
+}
 
+.content {
+  background: lightgrey;
+  height: 600px;
 }
 .main_img {
   background: url('http://www.jpfernandez.com/uploads/2/1/0/6/21061552/2938440_orig.jpg');
