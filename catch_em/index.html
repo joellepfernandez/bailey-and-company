@@ -116,7 +116,7 @@
         <!-- game timer -->
         <div id="timer">
           <div id="timer-countdown">
-            <h1 id="the-time">10</h1>
+            <h1 id="the-time">5</h1>
           </div>
             <button id="fire">Start</button>
             <!-- <button id="clear">Clear</button> -->
@@ -143,7 +143,7 @@
             // }
         }
 
-        var timeLimit = 10
+        var timeLimit = 5
         var currentPlayer = game.player2
         var theH1 = document.getElementById('the-time')
         var theTime = theH1.innerText
@@ -181,11 +181,12 @@
                 clearInterval(animationIntervalId) //if the timer is 0 stop the animation
                 clearInterval(countDownIntervalId)
                 $('body').off('click', '.object') // if the timer is 0 turn off scoring ability
-                scoreHistory.append('<p><span class="player-name">' + currentPlayerName + "</span>: " + game.player.score + '</p>') // add the current player's score to Score History
+                scoreHistory.append('<p data-banana="gwar" data-score="' + game.player.score + '"><span class="player-name">' + currentPlayerName + "</span>: " + game.player.score + '</p>') // add the current player's score to Score History
 
                 theTime = timeLimit
                 $('input').val('')
-                $('#current_score').html('0')
+                game.player.score = 0
+                $('#current_score').html(game.player.score)
 
             }
             theH1.innerHTML = theTime
