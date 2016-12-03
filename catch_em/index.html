@@ -94,6 +94,9 @@
           /*top: 0;
           left: 0;*/
         }
+        #popup {
+          z-index: 1;
+        }
       </style>
     </head>
   <body>
@@ -131,143 +134,154 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
     <script type="text/javascript">
-        var animationIntervalId;
-        var game = {
-            player: {
-                name: currentPlayerName,
-                score: 0
-            }
-            // ,
-            // player2: {
-            //     score: 0
-            // }
+    var animationIntervalId;
+    var game = {
+        player: {
+            name: currentPlayerName,
+            score: 0
         }
-        //game.players = [] // push players into array
+    }
+    var timeLimit = 5
+    var currentPlayer = game.player2
+    var theH1 = document.getElementById('the-time')
+    var theTime = theH1.innerText
+    var StartButton = $('#fire')
+    var CheckButton = $('#check-for-winner')
+    var currentPlayerDisplay = $('.current-player-display')
+    var currentPlayerName = $('input').val() //input value
+    var scoreList = $('#score-list')
+    var scoreHistory = $('#score-history')
+    var scores = []
+        ///////////timer//////////
+    StartButton.on('click', startTimer) //click on the start button to begin timer
+    CheckButton.on('click', checkForWinner)
 
-        var timeLimit = 5
-        var currentPlayer = game.player2
-        var theH1 = document.getElementById('the-time')
-        var theTime = theH1.innerText
-        var StartButton = $('#fire')
-        var CheckButton = $('#check-for-winner')
-        var currentPlayerDisplay = $('.current-player-display')
-        var currentPlayerName = $('input').val() //input value
-        var scoreHistory = $('#score-list')
-        var scores = []
-            ///////////timer//////////
-        StartButton.on('click', startTimer) //click on the start button to begin timer
-        CheckButton.on('click', function checkForWinner(){
-                  scores.sort(function(a,b){
-                    return b.score-a.score})
+    function checkForWinner() {
+        scores.sort(function(a, b) {
+            return b.score - a.score
+        })
 
-                    var i = 0
-                    alert("The winner is: " + scores[i].name + "!")
-                })
+        // var i = 0
+        // alert("The winner is: " + scores[i].name + "!")
 
-        function saveCurrentPlayer(){
-          currentPlayerName = $('input').val()
-        }
-        function startTimer() {
-            saveCurrentPlayer()
-            countDownIntervalId = setInterval(countDown, 1000) //timer counts down by second
+        // after sorting by top score first, low score last, make an array of all players that also got the top score:
+        var firstPlacePlayers = scores.filter(function(el){
+            return el.score == scores[0].score
+        })
+
+        // empty the score list container:
+        scoreHistory.empty()
+
+        // add a message declaring the top score;
+        scoreHistory.append('<h1>Top Score: ' + firstPlacePlayers[0].score + '</h1>')
+
+        // go through firstPlacePlayers and for each one, add the name to the list:
+        firstPlacePlayers.forEach(function(player){
+            scoreHistory.append('<h3>' + player.name + '</h3>')
+        })
+    }
+
+    function saveCurrentPlayer() {
+        currentPlayerName = $('input').val()
+    }
+
+    function startTimer() {
+        saveCurrentPlayer()
+        countDownIntervalId = setInterval(countDown, 1000) //timer counts down by second
             // clearGameBoard()
-            clearGameBoard()
-            addItems()
-            switchTurns() //when the clear button is clicked the turns are switched
-            $('body').on('click', '.object', function() { //click listener on good item
-                    $(this).remove() //remove good item
-                    if ($(this).hasClass('good')) {
-                        game.player.score += 1
-                    } else {
-                        game.player.score -= 2
-                    }
-                    $('#current_score').html(game.player.score) //add 1 point to score
-            })
-        }
-
-        function countDown() {
-            if (theTime > 0) { //if the timer is greater than 0 continue subtracting 1 second
-                theTime = theTime - 1
+        clearGameBoard()
+        addItems()
+        switchTurns() //when the clear button is clicked the turns are switched
+        $('body').on('click', '.object', function() { //click listener on good item
+            $(this).remove() //remove good item
+            if ($(this).hasClass('good')) {
+                game.player.score += 1
             } else {
-                clearInterval(animationIntervalId) //if the timer is 0 stop the animation
-                clearInterval(countDownIntervalId)
-                $('body').off('click', '.object') // if the timer is 0 turn off scoring ability
-                scoreHistory.append('<p data-score="' + game.player.score + '"><span class="player-name">' + currentPlayerName + "</span>: " + game.player.score + '</p>') // add the current player's score to Score History
-
-                scores.push({name: currentPlayerName , score:  +  $('#score-list p').last().data('score')})
-
-
-                theTime = timeLimit
-                $('input').val('')
-                game.player.score = 0
-                $('#current_score').html(game.player.score)
-
+                game.player.score -= 2
             }
-            theH1.innerHTML = theTime
-        }
+            $('#current_score').html(game.player.score) //add 1 point to score
+        })
+    }
 
-            ///////////animation//////////
-        var theGame = $('#game') //theGame area
-        var imgs = ['<div class="good object"><img src="./images/dog-treat.png"/></div>', '<div class="bad object"><img src="./images/chocolate.png"/></div>', '<div class="bad object"><img src="./images/grapes.png"/></div>', '<div class="good object"><img src="./images/kong.png"/></div>', '<div class="bad object"><img src="./images/poop.png"/></div>', '<div class="good object"><img src="./images/tennis-ball.png"/></div>', '<div class="good object"><img src="./images/carrot.png"/></div>', '<div class="bad object"><img src="./images/beer.png"/></div>', '<div class="good object"><img src="./images/strawberry.png"/></div>', '<div class="good object"><img src="./images/blueberry.png"/></div>', '<div class="bad object"><img src="./images/tomato.png"/></div>', '<div class="bad object"><img src="./images/mushroom.png"/></div>', '<div class="good object"><img src="./images/spinach.png"/></div>']
+    function countDown() {
+        if (theTime > 0) { //if the timer is greater than 0 continue subtracting 1 second
+            theTime = theTime - 1
+        } else {
+            clearInterval(animationIntervalId) //if the timer is 0 stop the animation
+            clearInterval(countDownIntervalId)
+            $('body').off('click', '.object') // if the timer is 0 turn off scoring ability
+            scoreList.append('<p data-score="' + game.player.score + '"><span class="player-name">' + currentPlayerName + "</span>: " + game.player.score + '</p>') // add the current player's score to Score History
 
-        function DogItem(div) {
-
-            theGame.append(div)
-            var thisItem = $('#game div').last()
-            thisItem.css({
-                top: genRandomNum(50, theGame.height()),
-                left: genRandomNum(50, theGame.width()),
+            scores.push({
+                name: currentPlayerName,
+                score: +$('#score-list p').last().data('score')
             })
-            thisItem.animate({
-                top: genRandomNum(50, theGame.height()),
-                left: genRandomNum(50, theGame.width()),
-            }, 2000)
+
+
+            theTime = timeLimit
+            $('input').val('')
+            game.player.score = 0
+            $('#current_score').html(game.player.score)
+
         }
+        theH1.innerHTML = theTime
+    }
 
-        function addItems() {
-            var newDogItem = setInterval(makeItem, 100)
-            animationIntervalId = newDogItem
+    ///////////animation//////////
+    var theGame = $('#game') //theGame area
+    var imgs = ['<div class="good object"><img src="./images/dog-treat.png"/></div>', '<div class="bad object"><img src="./images/chocolate.png"/></div>', '<div class="bad object"><img src="./images/grapes.png"/></div>', '<div class="good object"><img src="./images/kong.png"/></div>', '<div class="bad object"><img src="./images/poop.png"/></div>', '<div class="good object"><img src="./images/tennis-ball.png"/></div>', '<div class="good object"><img src="./images/carrot.png"/></div>', '<div class="bad object"><img src="./images/beer.png"/></div>', '<div class="good object"><img src="./images/strawberry.png"/></div>', '<div class="good object"><img src="./images/blueberry.png"/></div>', '<div class="bad object"><img src="./images/tomato.png"/></div>', '<div class="bad object"><img src="./images/mushroom.png"/></div>', '<div class="good object"><img src="./images/spinach.png"/></div>']
 
-            function makeItem(e) {
-                //makeTreats is the function of adding a dogTreat to the Game
-                new DogItem(imgs[Math.floor(Math.random() * (imgs.length))])
-                console.log(e)
-                    //references the function makeTreats to append a dogTreat every second
-                    // create a loop so that it creates a dogTreat every 1 second
-            }
+    function DogItem(div) {
+
+        theGame.append(div)
+        var thisItem = $('#game div').last()
+        thisItem.css({
+            top: genRandomNum(50, theGame.height()),
+            left: genRandomNum(50, theGame.width()),
+        })
+        thisItem.animate({
+            top: genRandomNum(50, theGame.height()),
+            left: genRandomNum(50, theGame.width()),
+        }, 2000)
+    }
+
+    function addItems() {
+        var newDogItem = setInterval(makeItem, 100)
+        animationIntervalId = newDogItem
+
+        function makeItem(e) {
+            //makeTreats is the function of adding a dogTreat to the Game
+            new DogItem(imgs[Math.floor(Math.random() * (imgs.length))])
+            console.log(e)
+                //references the function makeTreats to append a dogTreat every second
+                // create a loop so that it creates a dogTreat every 1 second
         }
-        //random number generator
-        function genRandomNum(min, max) {
-            return Math.round((Math.random() * (max - min)) + min - 50)
+    }
+    //random number generator
+    function genRandomNum(min, max) {
+        return Math.round((Math.random() * (max - min)) + min - 50)
+    }
+    ///////////click, score, remove//////////
+
+    ///////////restart game///////////
+    // $('#clear').on('click', function(){
+    //   clearGameBoard() //when the clear button is clicked it clears the game board
+    //
+    // })
+
+    function clearGameBoard() {
+        theGame.html('')
+            // $('#current_score').html('0')
+    }
+    ///////////switch players///////////
+    // if it's player 1's turn, make currentPlayer game.player2, and vice versa:
+    function switchTurns() {
+        if (currentPlayer == game.player2) {
+            currentPlayer = game.player1
+        } else {
+            currentPlayer = game.player2
         }
-        ///////////click, score, remove//////////
-
-            ///////////restart game///////////
-            // $('#clear').on('click', function(){
-            //   clearGameBoard() //when the clear button is clicked it clears the game board
-            //
-            // })
-
-            function clearGameBoard() {
-              theGame.html('')
-              // $('#current_score').html('0')
-            }
-        ///////////switch players///////////
-        // if it's player 1's turn, make currentPlayer game.player2, and vice versa:
-        function switchTurns() {
-            if (currentPlayer == game.player2) {
-                currentPlayer = game.player1
-            } else {
-                currentPlayer = game.player2
-            }
-        }
-///
-//   function checkForWinner(){
-//    scores.sort(function(a, b){return b-a})
-//    console.log('order list is : ' + scores )
-// }
-
-
+    }
     </script>
   </body>
 </html>
