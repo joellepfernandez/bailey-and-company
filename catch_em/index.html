@@ -7,9 +7,8 @@
     <style>
        body{
          margin : 0 auto;
-         /*text-align: center;
-         display: inline-block;*/
          width: 100%;
+         background: #f7c331;
        }
        .main-title {
           text-align: center;
@@ -23,53 +22,36 @@
           text-align: center;
         }
         #container {
-          border: 5px slategrey solid;
-          position: absolute;
-          width: 97%;
-          margin: 0 10px;
-          box-shadow: 6px 4px 20px -8px rgba(0,0,0,0.75);
-          border-radius: 30px;
+          margin: 0 auto;
         }
         #game {
-          background: ivory;
-          border-right: 5px slategrey solid;
-          width: 64.67%;
+          background: #dcc7aa;
+          border: 5px #f7882f solid;
+          width: 63%;
           height: 500px;
           margin: 0 auto;
-          /*display: inline-block;*/
-          float: left;
+          display: inline-block;
           border-radius: 30px 0 0 30px ;
-          /*position: relative;*/
+          position: relative;
         }
         #console {
-          width: 34.55%;
+          border: 5px #f7882f solid;
+          width: 33.9%;
           margin: 0 auto;
           height: 500px;
-          /*display: inline-block;*/
-          float: left;
-          text-align: center;
-          border-radius: 0 30px 30px 0;
-          position: relative;
+          display: inline-block;
+          border-radius: 0 25px 25px 0;
+          position: absolute;
+          background: #6b7a8f;
+          color: #ffffff;
         }
         .player, #timer, #score-history {
           text-align: center;
           font-family: 'Arvo', serif;
         }
-        #timer-countdown{
-          /*width:98%;*/
-          /*background: CornflowerBlue;*/
-          /*display: inline-block;
-          text-align: center;*/
-        }
         #score-history, #timer-countdown {
           border-top: 1px black dotted;
           margin-top: 14px;
-        }
-        #score-list{
-          /*width:98%;*/
-          /*background:lightsalmon;*/
-          /*display: inline-block;
-          text-align: center;*/
         }
         .player-name {
           color: blue;
@@ -91,8 +73,6 @@
         }
         #game div {
           position:absolute;
-          /*top: 0;
-          left: 0;*/
         }
         #popup {
           z-index: 1;
@@ -111,7 +91,7 @@
       <div id="console">
         <!-- player info -->
         <div class="player">
-          <h3 class="current-player-display">Current Player:
+          <h3 class="current-player-display">Enter your name:
             <input id="current_player_name"></input>
           </h3>
           <h3>Score: <span id="current_score"> 0<span></h3>
@@ -123,6 +103,7 @@
           </div>
             <button id="fire">Start</button>
             <button id="check-for-winner">Find Winner</button>
+            <button id="restart">Restart the Game</button>
         </div>
         <!-- score history -->
         <div id="score-history">
@@ -134,154 +115,155 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
     <script type="text/javascript">
-    var animationIntervalId;
-    var game = {
-        player: {
-            name: currentPlayerName,
-            score: 0
-        }
-    }
-    var timeLimit = 5
-    var currentPlayer = game.player2
-    var theH1 = document.getElementById('the-time')
-    var theTime = theH1.innerText
-    var StartButton = $('#fire')
-    var CheckButton = $('#check-for-winner')
-    var currentPlayerDisplay = $('.current-player-display')
-    var currentPlayerName = $('input').val() //input value
-    var scoreList = $('#score-list')
-    var scoreHistory = $('#score-history')
-    var scores = []
-        ///////////timer//////////
-    StartButton.on('click', startTimer) //click on the start button to begin timer
-    CheckButton.on('click', checkForWinner)
+      var animationIntervalId;
+      var game = {
+          player: {
+              name: currentPlayerName,
+              score: 0
+          }
+      }
+      var timeLimit = 5
+      var currentPlayer = game.player2
+      var theH1 = document.getElementById('the-time')
+      var theTime = theH1.innerText
+      var StartButton = $('#fire')
+      var CheckButton = $('#check-for-winner')
+      var RestartButton = $('#restart')
+      var currentPlayerDisplay = $('.current-player-display')
+      var currentPlayerName = $('input').val() //input value
+      var scoreList = $('#score-list')
+      var scoreHistory = $('#score-history')
+      var scores = []
+          ///////////timer//////////
+      StartButton.on('click', startTimer) //click on the start button to begin timer
+      CheckButton.on('click', checkForWinner) //click on check button to check for winner
+      RestartButton.on('click', appendScoreList) //click on restart button to append score list
 
-    function checkForWinner() {
-        scores.sort(function(a, b) {
-            return b.score - a.score
-        })
+      function checkForWinner() {
+          scores.sort(function(a, b) {
+              return b.score - a.score
+          })
 
-        // var i = 0
-        // alert("The winner is: " + scores[i].name + "!")
+          // after sorting by top score first, low score last, make an array of all players that also got the top score:
+          var firstPlacePlayers = scores.filter(function(el) {
+              return el.score == scores[0].score
+          })
 
-        // after sorting by top score first, low score last, make an array of all players that also got the top score:
-        var firstPlacePlayers = scores.filter(function(el){
-            return el.score == scores[0].score
-        })
+          // empty the score list container:
+          scoreHistory.empty()
 
-        // empty the score list container:
-        scoreHistory.empty()
+          // add a message declaring the top score;
+          scoreHistory.append('<h1>Top Score: ' + firstPlacePlayers[0].score + '</h1>')
 
-        // add a message declaring the top score;
-        scoreHistory.append('<h1>Top Score: ' + firstPlacePlayers[0].score + '</h1>')
+          // go through firstPlacePlayers and for each one, add the name to the list:
+          firstPlacePlayers.forEach(function(player) {
+              scoreHistory.append('<h3>' + player.name + '</h3>')
+          })
+      }
 
-        // go through firstPlacePlayers and for each one, add the name to the list:
-        firstPlacePlayers.forEach(function(player){
-            scoreHistory.append('<h3>' + player.name + '</h3>')
-        })
-    }
+      function saveCurrentPlayer() {
+          currentPlayerName = $('input').val()
+      }
 
-    function saveCurrentPlayer() {
-        currentPlayerName = $('input').val()
-    }
+      function startTimer() {
+          saveCurrentPlayer()
+          countDownIntervalId = setInterval(countDown, 1000) //timer counts down by second
+              // clearGameBoard()
+          clearGameBoard()
+          addItems()
+          switchTurns() //when the clear button is clicked the turns are switched
+          $('body').on('click', '.object', function() { //click listener on good item
+              $(this).remove() //remove good item
+              if ($(this).hasClass('good')) {
+                  game.player.score += 1
+              } else {
+                  game.player.score -= 2
+              }
+              $('#current_score').html(game.player.score) //add 1 point to score
+          })
+      }
 
-    function startTimer() {
-        saveCurrentPlayer()
-        countDownIntervalId = setInterval(countDown, 1000) //timer counts down by second
-            // clearGameBoard()
-        clearGameBoard()
-        addItems()
-        switchTurns() //when the clear button is clicked the turns are switched
-        $('body').on('click', '.object', function() { //click listener on good item
-            $(this).remove() //remove good item
-            if ($(this).hasClass('good')) {
-                game.player.score += 1
-            } else {
-                game.player.score -= 2
-            }
-            $('#current_score').html(game.player.score) //add 1 point to score
-        })
-    }
+      function countDown() {
+          if (theTime > 0) { //if the timer is greater than 0 continue subtracting 1 second
+              theTime = theTime - 1
+          } else {
+              clearInterval(animationIntervalId) //if the timer is 0 stop the animation
+              clearInterval(countDownIntervalId)
+              $('body').off('click', '.object') // if the timer is 0 turn off scoring ability
+              scoreList.append('<p data-score="' + game.player.score + '"><span class="player-name">' + currentPlayerName + "</span>: " + game.player.score + '</p>') // add the current player's score to Score History
 
-    function countDown() {
-        if (theTime > 0) { //if the timer is greater than 0 continue subtracting 1 second
-            theTime = theTime - 1
-        } else {
-            clearInterval(animationIntervalId) //if the timer is 0 stop the animation
-            clearInterval(countDownIntervalId)
-            $('body').off('click', '.object') // if the timer is 0 turn off scoring ability
-            scoreList.append('<p data-score="' + game.player.score + '"><span class="player-name">' + currentPlayerName + "</span>: " + game.player.score + '</p>') // add the current player's score to Score History
-
-            scores.push({
-                name: currentPlayerName,
-                score: +$('#score-list p').last().data('score')
-            })
+              scores.push({
+                  name: currentPlayerName,
+                  score: +$('#score-list p').last().data('score')
+              })
 
 
-            theTime = timeLimit
-            $('input').val('')
-            game.player.score = 0
-            $('#current_score').html(game.player.score)
+              theTime = timeLimit
+              $('input').val('')
+              game.player.score = 0
+              $('#current_score').html(game.player.score)
 
-        }
-        theH1.innerHTML = theTime
-    }
+          }
+          theH1.innerHTML = theTime
+      }
 
-    ///////////animation//////////
-    var theGame = $('#game') //theGame area
-    var imgs = ['<div class="good object"><img src="./images/dog-treat.png"/></div>', '<div class="bad object"><img src="./images/chocolate.png"/></div>', '<div class="bad object"><img src="./images/grapes.png"/></div>', '<div class="good object"><img src="./images/kong.png"/></div>', '<div class="bad object"><img src="./images/poop.png"/></div>', '<div class="good object"><img src="./images/tennis-ball.png"/></div>', '<div class="good object"><img src="./images/carrot.png"/></div>', '<div class="bad object"><img src="./images/beer.png"/></div>', '<div class="good object"><img src="./images/strawberry.png"/></div>', '<div class="good object"><img src="./images/blueberry.png"/></div>', '<div class="bad object"><img src="./images/tomato.png"/></div>', '<div class="bad object"><img src="./images/mushroom.png"/></div>', '<div class="good object"><img src="./images/spinach.png"/></div>']
+      ///////////animation//////////
+      var theGame = $('#game') //theGame area
+      var imgs = ['<div class="good object"><img src="./images/dog-treat.png"/></div>', '<div class="bad object"><img src="./images/chocolate.png"/></div>', '<div class="bad object"><img src="./images/grapes.png"/></div>', '<div class="good object"><img src="./images/kong.png"/></div>', '<div class="bad object"><img src="./images/poop.png"/></div>', '<div class="good object"><img src="./images/tennis-ball.png"/></div>', '<div class="good object"><img src="./images/carrot.png"/></div>', '<div class="bad object"><img src="./images/beer.png"/></div>', '<div class="good object"><img src="./images/strawberry.png"/></div>', '<div class="good object"><img src="./images/blueberry.png"/></div>', '<div class="bad object"><img src="./images/tomato.png"/></div>', '<div class="bad object"><img src="./images/mushroom.png"/></div>', '<div class="good object"><img src="./images/spinach.png"/></div>']
 
-    function DogItem(div) {
+      function DogItem(div) {
 
-        theGame.append(div)
-        var thisItem = $('#game div').last()
-        thisItem.css({
-            top: genRandomNum(50, theGame.height()),
-            left: genRandomNum(50, theGame.width()),
-        })
-        thisItem.animate({
-            top: genRandomNum(50, theGame.height()),
-            left: genRandomNum(50, theGame.width()),
-        }, 2000)
-    }
+          theGame.append(div)
+          var thisItem = $('#game div').last()
+          thisItem.css({
+              top: genRandomNum(50, theGame.height()),
+              left: genRandomNum(50, theGame.width()),
+          })
+          thisItem.animate({
+              top: genRandomNum(50, theGame.height()),
+              left: genRandomNum(50, theGame.width()),
+          }, 2000)
+      }
 
-    function addItems() {
-        var newDogItem = setInterval(makeItem, 100)
-        animationIntervalId = newDogItem
+      function addItems() {
+          var newDogItem = setInterval(makeItem, 100)
+          animationIntervalId = newDogItem
 
-        function makeItem(e) {
-            //makeTreats is the function of adding a dogTreat to the Game
-            new DogItem(imgs[Math.floor(Math.random() * (imgs.length))])
-            console.log(e)
-                //references the function makeTreats to append a dogTreat every second
-                // create a loop so that it creates a dogTreat every 1 second
-        }
-    }
-    //random number generator
-    function genRandomNum(min, max) {
-        return Math.round((Math.random() * (max - min)) + min - 50)
-    }
-    ///////////click, score, remove//////////
+          function makeItem(e) {
+              //makeTreats is the function of adding a dogTreat to the Game
+              new DogItem(imgs[Math.floor(Math.random() * (imgs.length))])
+              console.log(e)
+                  //references the function makeTreats to append a dogTreat every second
+                  // create a loop so that it creates a dogTreat every 1 second
+          }
+      }
+      //random number generator
+      function genRandomNum(min, max) {
+          return Math.round((Math.random() * (max - min)) + min - 50)
+      }
 
-    ///////////restart game///////////
-    // $('#clear').on('click', function(){
-    //   clearGameBoard() //when the clear button is clicked it clears the game board
-    //
-    // })
+      function clearGameBoard() {
+          theGame.html('')
+      }
+      ///////////switch players///////////
+      // if it's player 1's turn, make currentPlayer game.player2, and vice versa:
+      function switchTurns() {
+          if (currentPlayer == game.player2) {
+              currentPlayer = game.player1
+          } else {
+              currentPlayer = game.player2
+          }
+      }
 
-    function clearGameBoard() {
-        theGame.html('')
-            // $('#current_score').html('0')
-    }
-    ///////////switch players///////////
-    // if it's player 1's turn, make currentPlayer game.player2, and vice versa:
-    function switchTurns() {
-        if (currentPlayer == game.player2) {
-            currentPlayer = game.player1
-        } else {
-            currentPlayer = game.player2
-        }
-    }
+      function appendScoreList() {
+          scoreHistory.empty()
+          scoreList.append('<p data-score="' + game.player.score + '"><span class="player-name">' + currentPlayerName + "</span>: " + game.player.score + '</p>') // add the current player's score to Score History
+
+          scores.push({
+              name: currentPlayerName,
+              score: +$('#score-list p').last().data('score')
+          })
+      }
     </script>
   </body>
 </html>
