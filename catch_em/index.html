@@ -114,6 +114,9 @@
           background-color: white;
           border: 1px #f7882f solid;
         }
+        .italicize {
+          font-style: italic;
+        }
         footer {
           background-color: #6b7a8f;
           text-align: center;
@@ -135,7 +138,7 @@
       </ul>
     </nav>
     <h1 class="main-title">Catch Em</h1>
-    <h3 class="subtitle">Test your knowledge of what is good and not so good for your pup!</h3>a
+    <h3 class="subtitle">Test your and your friends' knowledge of what is good and <span class="italicize">not so good </span> for me and my dog pals!</h3>
     <div id="container">
       <!-- game -->
       <div id="game">
@@ -315,6 +318,7 @@
 
       function appendScoreList() {
           scoreHistory.empty()
+          scores.empty()
           scoreHistory.append('<h3>Score History</h3>'+'<div id="score-list">'+'</div>')
           scoreList.append('<p data-score="' + game.player.score + '"><span class="player-name">' + currentPlayerName + "</span>: " + game.player.score + '</p>') // add the current player's score to Score History
           scores.push({
