@@ -5,6 +5,12 @@ Catch Em is a game that challenges players to catch as many items that are dog-f
 
 ![Image](https://joellepfernandez.github.io/bailey-and-company/catch_em/images/Screen Shot of Catch Em.png)
 
+##Installation Instructions
+Click [here](https://joellepfernandez.github.io/bailey-and-company/catch_em/index.html) to play the game.
+
+##Approach Taken
+This game was inspired by the class activity where we randomly generated boxes that had randomly generated locations. Similarly, this game randomly generates an index for images in an array and then randomly generates a location in the game.
+
 ##How to Play
 1. Enter your name.
 2. Press the 'Start' button to begin the game.
@@ -44,8 +50,11 @@ Catch Em is a game that challenges players to catch as many items that are dog-f
 ##Motivation
 I love dogs and I want to make sure every human knows what he or she should not be giving to their fur friends.
 
-##Development Process
-Technologies used: HTML5, CSS, and Javascript/jQuery
+##Technologies Used
+HTML5, CSS, and Javascript/jQuery
+
+##Unsolved Problems/Future Adjustments
+In the future, I would like to create various levels of play.
 
 ##Acknowledgements
 Credit to the owners of the images used.
