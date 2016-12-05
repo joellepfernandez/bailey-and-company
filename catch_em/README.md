@@ -20,4 +20,4 @@ Catch Em is a game that challenges players to catch as many items that are dog-f
 I love dogs and I want to make sure every human knows what he or she should not be giving to their fur friends.
 
 ##Link
-[I'm an inline-style link](https://joellepfernandez.github.io/bailey-and-company/catch_em/index.html)
+[Catch Em](https://joellepfernandez.github.io/bailey-and-company/catch_em/index.html)
