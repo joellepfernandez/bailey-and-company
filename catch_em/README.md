@@ -17,6 +17,7 @@ As a player, I want to be able to restart the game if I want a rematch.
 Motivation
 I love dogs!
 
+
 API Reference
 
 Tests
