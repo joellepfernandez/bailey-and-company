@@ -20,16 +20,16 @@ li {
 
 li a {
     display: block;
-    color: white;
+    color: #ffffff;
     text-align: center;
     /*padding: 14px 16px;*/
     text-decoration: none;
     position: relative;
 }
 
-li a:hover {
+/*li a:hover {
     background-color: #f7882f;
-}
+}*/
 .first {
   padding-left: 19%;
 }
