@@ -15,13 +15,7 @@ As a player, I want to know who has the top score by clicking on a button (Find 
 As a player, I want to be able to restart the game if I want a rematch.
 
 Motivation
-I love dogs!
-
-
-API Reference
-
-Tests
-
-Contributors
+I love dogs and I want to make sure every human knows what he or she should not be giving to their fur friends.
 
 Link
+https://joellepfernandez.github.io/bailey-and-company/catch_em/index.html

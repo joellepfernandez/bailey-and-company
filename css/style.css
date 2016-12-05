@@ -1,5 +1,5 @@
 nav {
-  background: #6b7a8f;
+  width: 100%;
 }
 
 ul {
@@ -12,7 +12,7 @@ ul {
 
 li {
     float: left;
-    padding: 1% 8%;
+    width: 25%;
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: 1.25em;
     font-weight: bold;
@@ -22,7 +22,7 @@ li a {
     display: block;
     color: #ffffff;
     text-align: center;
-    /*padding: 14px 16px;*/
+    padding: 14px 16px;
     text-decoration: none;
     position: relative;
 }
@@ -30,12 +30,12 @@ li a {
 /*li a:hover {
     background-color: #f7882f;
 }*/
-.first {
+/*.first {
   padding-left: 19%;
 }
 .last {
   padding-right: 19%;
-}
+}*/
 h1 {
   font-family: 'Homemade Apple', cursive;
 }
