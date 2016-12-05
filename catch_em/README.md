@@ -1,6 +1,8 @@
 Synopsis:
 Catch Em is a game that challenges players to catch as many items that are dog-friendly as possible, while avoiding items known to be not so good for dogs.
 
+![Image](https://joellepfernandez.github.io/bailey-and-company/catch_em/images/Screen Shot of Catch Em.png)
+
 User Stories
 As a player, I  want to write my player name.
 As a player, I want to click the start button to begin the game.
