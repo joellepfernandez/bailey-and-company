@@ -111,8 +111,8 @@
         <!-- score history -->
         <div id="score-history">
           <h3>Score History</h3>
-            <div id="score-list">
-            </div>
+            <!-- <div id="score-list">
+            </div> -->
         </div>
       </div>
     </div>
@@ -193,7 +193,8 @@
               clearInterval(animationIntervalId) //if the timer is 0 stop the animation
               clearInterval(countDownIntervalId)
               $('body').off('click', '.object') // if the timer is 0 turn off scoring ability
-              scoreList.append('<p data-score="' + game.player.score + '"><span class="player-name">' + currentPlayerName + "</span>: " + game.player.score + '</p>') // add the current player's score to Score History
+              scoreHistory.append('<div id="score-list"></div>')
+              $('#score-list').append('<p data-score="' + game.player.score + '"><span class="player-name">' + currentPlayerName + "</span>: " + game.player.score + '</p>') // add the current player's score to Score History
 
               scores.push({
                   name: currentPlayerName,
@@ -260,6 +261,7 @@
 
       function appendScoreList() {
           scoreHistory.empty()
+          scoreHistory.append('<h3>Score History</h3>'+'<div id="score-list">'+'</div>')
           scoreList.append('<p data-score="' + game.player.score + '"><span class="player-name">' + currentPlayerName + "</span>: " + game.player.score + '</p>') // add the current player's score to Score History
 
           scores.push({
