@@ -261,7 +261,6 @@
       function appendScoreList() {
           scoreHistory.empty()
           scoreList.append('<p data-score="' + game.player.score + '"><span class="player-name">' + currentPlayerName + "</span>: " + game.player.score + '</p>') // add the current player's score to Score History
-
           scores.push({
               name: currentPlayerName,
               score: +$('#score-list p').last().data('score')
