@@ -5,6 +5,36 @@
     <title>Catch 'Em</title>
     <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Open+Sans+Condensed:300|Roboto+Slab" rel="stylesheet">
     <style>
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #6b7a8f;
+      }
+
+      li {
+          float: left;
+          padding: 1% 8%;
+          font-family: 'Open Sans Condensed', sans-serif;
+          font-size: 1.25em;
+          font-weight: bold;
+      }
+
+      li a {
+          display: block;
+          color: #ffffff;
+          text-align: center;
+          /*padding: 14px 16px;*/
+          text-decoration: none;
+          position: relative;
+      }
+      .first {
+        padding-left: 19%;
+      }
+      .last {
+        padding-right: 19%;
+      }
        body{
          margin : 0 auto;
          width: 100%;
@@ -84,11 +114,28 @@
           background-color: white;
           border: 1px #f7882f solid;
         }
+        footer {
+          background-color: #6b7a8f;
+          text-align: center;
+          height: 25px;
+          padding: 15px;
+          color: #ffffff;
+          font-family: 'Open Sans Condensed', sans-serif;
+        }
+
       </style>
     </head>
   <body>
+    <nav>
+      <ul>
+        <li class="first"><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="#">Games</a></li>
+        <li class="last"><a href="../contact.html">Contact</a></li></li>
+      </ul>
+    </nav>
     <h1 class="main-title">Catch Em</h1>
-    <h3 class="subtitle">Test your knowledge of what is good and not so good for your pup!</h3>
+    <h3 class="subtitle">Test your knowledge of what is good and not so good for your pup!</h3>a
     <div id="container">
       <!-- game -->
       <div id="game">
@@ -120,6 +167,9 @@
         </div>
       </div>
     </div>
+    <footer class="page-footer">
+      © 2016 Bailey and Company
+    </footer>
     <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
     <script type="text/javascript">
       var animationIntervalId;
