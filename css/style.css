@@ -1,29 +1,67 @@
 nav {
-  /*background: pink;*/
+  background: #6b7a8f;
 }
 
-ul{
-  list-style-type: none; //removes bullets
-  display: inline;
-  margin: 0; //removes browser default
-  padding: 0; //removess browser default
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #6b7a8f;
 }
 
 li {
-  float: left;
-  display: block;
+    float: left;
+    padding: 1% 8%;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 1.25em;
+    font-weight: bold;
 }
 
-a {
-  display: block; //creates block around text so area around is clickable
-  padding: 8px; //creates space
-  background: tomato;
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    /*padding: 14px 16px;*/
+    text-decoration: none;
+    position: relative;
 }
 
+li a:hover {
+    background-color: #f7882f;
+}
+.first {
+  padding-left: 19%;
+}
+.last {
+  padding-right: 19%;
+}
+h1 {
+  font-family: 'Homemade Apple', cursive;
+}
+h2 {
+  font-family: 'Roboto Slab', serif;
+}
+h1, h2 {
+  text-align: center;
+}
 .content {
-  background: lightgrey;
-  height: 600px;
+  /*background: #dcc7aa;*/
 }
-.main_img {
-  background: url('http://www.jpfernandez.com/uploads/2/1/0/6/21061552/2938440_orig.jpg');
+img {
+ width: 25%;
+ height: 25%;
+}
+.friends {
+  width: 95%;
+  text-align: center;
+  padding: 15px;
+}
+footer {
+  background-color: #6b7a8f;
+  text-align: center;
+  height: 25px;
+  padding: 15px;
+  color: #ffffff;
+  font-family: 'Open Sans Condensed', sans-serif;
 }
