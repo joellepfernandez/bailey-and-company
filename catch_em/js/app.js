@@ -26,8 +26,7 @@
   function startTimer() {
       saveCurrentPlayer()
       countDownIntervalId = setInterval(countDown, 1000) //timer counts down by second
-          // clearGameBoard()
-      clearGameBoard()
+      clearGameBoard() // clearGameBoard()
       addItems()
       // switchTurns() //when the clear button is clicked the turns are switched
       $('body').on('click', '.object', function() { //click listener on good item
@@ -48,15 +47,15 @@
           clearInterval(animationIntervalId) //if the timer is 0 stop the animation
           clearInterval(countDownIntervalId)
           $('body').off('click', '.object') // if the timer is 0 turn off scoring ability
-          scoreHistory.append('<div id="score-list"></div>')
+          scoreHistory.append('<div id="score-list"></div>') //adds score history
           $('#score-list').append('<p data-score="' + game.player.score + '"><span class="player-name">' + currentPlayerName + "</span>: " + game.player.score + '</p>') // add the current player's score to Score History
-          scores.push({
+          scores.push({ //adds current player's name and score
               name: currentPlayerName,
               score: +$('#score-list p').last().data('score')
           })
-          theTime = timeLimit
-          $('input').val('')
-          game.player.score = 0
+          theTime = timeLimit //says time limit is up
+          $('input').val('') //clears inpu
+          game.player.score = 0 //makes scores 0
           $('#current_score').html(game.player.score)
       }
       theH1.innerHTML = theTime
@@ -64,7 +63,7 @@
 
   ///////////animation//////////
   var theGame = $('#game') //theGame area
-  var imgs = ['<div class="good object"><img src="./images/dog-treat.png"/></div>', '<div class="bad object"><img src="./images/chocolate.png"/></div>', '<div class="bad object"><img src="./images/grapes.png"/></div>', '<div class="good object"><img src="./images/kong.png"/></div>', '<div class="bad object"><img src="./images/poop.png"/></div>', '<div class="good object"><img src="./images/tennis-ball.png"/></div>', '<div class="good object"><img src="./images/carrot.png"/></div>', '<div class="bad object"><img src="./images/beer.png"/></div>', '<div class="good object"><img src="./images/strawberry.png"/></div>', '<div class="good object"><img src="./images/blueberry.png"/></div>', '<div class="bad object"><img src="./images/tomato.png"/></div>', '<div class="bad object"><img src="./images/mushroom.png"/></div>', '<div class="good object"><img src="./images/spinach.png"/></div>']
+  var imgs = ['<div class="good object"><img src="./images/dog-treat.png"/></div>', '<div class="bad object"><img src="./images/chocolate.png"/></div>', '<div class="bad object"><img src="./images/grapes.png"/></div>', '<div class="good object"><img src="./images/kong.png"/></div>', '<div class="bad object"><img src="./images/poop.png"/></div>', '<div class="good object"><img src="./images/tennis-ball.png"/></div>', '<div class="good object"><img src="./images/carrot.png"/></div>', '<div class="bad object"><img src="./images/beer.png"/></div>', '<div class="good object"><img src="./images/strawberry.png"/></div>', '<div class="good object"><img src="./images/blueberry.png"/></div>', '<div class="bad object"><img src="./images/tomato.png"/></div>', '<div class="bad object"><img src="./images/mushroom.png"/></div>', '<div class="good object"><img src="./images/spinach.png"/></div>'] //images
 
   function DogItem(div) {
       theGame.append(div)
