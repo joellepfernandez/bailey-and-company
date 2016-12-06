@@ -74,8 +74,15 @@ body{
   margin-top: 14px;
 }
 .player-name {
-  color: blue;
+  color: #f7882f;
   font-weight: bold;
+}
+input {
+  background: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px #ffffff solid;
 }
 span {
   font-weight: bold;
