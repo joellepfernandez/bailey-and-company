@@ -83,6 +83,17 @@ span {
 img {
   width: 50px;
 }
+.center {
+  text-align: center;
+  margin: auto;
+}
+.social-media {
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+.sm-icon {
+  width: 5%;
+}
 .clearfix:after {
   visibility: hidden;
   display: block;
