@@ -26,18 +26,9 @@ li a {
     text-decoration: none;
     position: relative;
 }
-
-/*li a:hover {
-    background-color: #f7882f;
-}*/
-/*.first {
-  padding-left: 19%;
-}
-.last {
-  padding-right: 19%;
-}*/
 h1 {
   font-family: 'Homemade Apple', cursive;
+
 }
 h2 {
   font-family: 'Roboto Slab', serif;
@@ -45,23 +36,72 @@ h2 {
 h1, h2 {
   text-align: center;
 }
-.content {
-  /*background: #dcc7aa;*/
+h3 {
+  font-family: 'Open Sans Condensed', sans-serif;
 }
-img {
+.content {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 5px;
+}
+.quarter-size {
  width: 25%;
  height: 25%;
+}
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
 }
 .friends {
   width: 95%;
   text-align: center;
   padding: 15px;
 }
+.about-pic {
+  margin-right: 25px;
+  height: 150px;
+  border-radius: 300px;
+}
+.dna-pic {
+  width: 50%;
+}
+.about{
+  display: inline-block;
+  text-align: center;
+  padding-top: 20px;
+  margin-bottom: -25px;
+  width: 95%;
+}
+.header-about {
+  display: inline-block;
+  text-align: center;
+}
+input {
+  font-family: 'Roboto Slab', serif;
+}
+.name, .email {
+  height: 30px;
+}
+.message {
+  height: 200px;
+}
+
 footer {
+  width: 100%;
   background-color: #6b7a8f;
   text-align: center;
   height: 25px;
   padding: 15px;
   color: #ffffff;
   font-family: 'Open Sans Condensed', sans-serif;
+}
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  content: " ";
+  clear: both;
+  height: 0;
+  font-size: 0;
 }

@@ -22,15 +22,6 @@ li a {
     text-decoration: none;
     position: relative;
 }
-/*li a:hover {
-    background-color: #f7882f;
-}*/
-/*.first {
-  padding-left: 19%;
-}
-.last {
-  padding-right: 19%;
-}*/
 body{
  margin : 0 auto;
  width: 100%;
