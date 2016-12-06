@@ -22,11 +22,13 @@ li a {
     text-decoration: none;
     position: relative;
 }
+
 body{
  margin : 0 auto;
  width: 100%;
  background: #f7c331;
 }
+
 .main-title {
   text-align: center;
   font-family: 'Homemade Apple', cursive;
@@ -35,18 +37,22 @@ body{
   margin-bottom: -24px;
   text-shadow: 2px 2px #ffffff;
 }
+
 .subtitle{
   font-family: 'Roboto Slab', serif;
   text-align: center;
   font-size: 1.25sem;
 }
+
 h4 {
   padding-bottom: 4px;
 }
+
 #container {
   margin: 0 auto;
   width: 900px;
 }
+
 #game {
   background: #dcc7aa;
   border: 5px #f7882f solid;
@@ -57,6 +63,7 @@ h4 {
   border-radius: 30px 0 0 30px ;
   position: relative;
 }
+
 #console {
   border: 5px #f7882f solid;
   width: 310px;
@@ -68,18 +75,22 @@ h4 {
   background: #6b7a8f;
   color: #ffffff;
 }
+
 .player, #timer, #score-history {
   text-align: center;
   font-family: 'Roboto Slab', serif;
 }
+
 #score-history, #timer-countdown {
   border-top: 1px #000000 dotted;
   margin-top: 14px;
 }
+
 .player-name {
   color: #f7882f;
   font-weight: bold;
 }
+
 input {
   background: transparent;
   border-top: none;
@@ -87,29 +98,36 @@ input {
   border-right: none;
   border-bottom: 1px #ffffff solid;
 }
+
 input[type="text"]{
   color: #ffffff;
   font-family: 'Roboto Slab', serif;
   font-size: .75em;
   text-align: center;
 }
+
 span {
   font-weight: bold;
 }
+
 img {
   width: 50px;
 }
+
 .center {
   text-align: center;
   margin: auto;
 }
+
 .social-media {
   padding-top: 5px;
   padding-bottom: 10px;
 }
+
 .sm-icon {
   width: 5%;
 }
+
 .clearfix:after {
   visibility: hidden;
   display: block;
@@ -118,9 +136,11 @@ img {
   height: 0;
   font-size: 0;
 }
+
 #game div {
   position:absolute;
 }
+
 button {
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 1em;
@@ -128,33 +148,42 @@ button {
   background-color: white;
   border: 1px #f7882f solid;
 }
+
 h2, h4{
   font-family: 'Roboto Slab', serif;
 }
+
 ol, table, th, tr, td {
   font-family: 'Open Sans Condensed', sans-serif;
 }
+
 .italicize {
   font-style: italic;
 }
+
 .bold {
   font-weight: bold;
 }
+
 .how-to-play {
   width: 37%;
   margin: auto;
 }
+
 .scoring {
   width: 10%;
 }
+
 table {
   width: 50%;
   background: #ffffff;
 }
+
 table, th, td {
   border: 1px solid #f7882f;
   border-collapse: collapse;
 }
+
 footer {
   background-color: #6b7a8f;
   text-align: center;
