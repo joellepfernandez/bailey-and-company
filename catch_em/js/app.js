@@ -6,7 +6,7 @@
           score: 0
       }
   }
-  var timeLimit = 5
+  var timeLimit = 60
   var currentPlayer = game.player2
   var theH1 = document.getElementById('the-time')
   var theTime = theH1.innerText
@@ -89,7 +89,7 @@
   }
 
   function genRandomNum(min, max) { //random number generator
-      return Math.round((Math.random() * (max - min)) + min - 60)
+      return Math.round((Math.random() * (max - min)) + min - 50)
   }
 
   function clearGameBoard() { //clears game board
