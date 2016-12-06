@@ -6,7 +6,7 @@
           score: 0
       }
   }
-  var timeLimit = 60
+  var timeLimit = 30
   var currentPlayer = game.player2
   var theH1 = document.getElementById('the-time')
   var theTime = theH1.innerText
