@@ -80,7 +80,7 @@
   }
 
   function addItems() { //creates a new item ever second
-      var newDogItem = setInterval(makeItem, 1000)
+      var newDogItem = setInterval(makeItem, 500)
       animationIntervalId = newDogItem
       function makeItem(e) {
           new DogItem(imgs[Math.floor(Math.random() * (imgs.length))]) //chooses item base on randomly generated index
