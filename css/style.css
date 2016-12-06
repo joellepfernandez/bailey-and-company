@@ -87,7 +87,10 @@ input {
 .message {
   height: 200px;
 }
-
+.center {
+  text-align: center;
+  margin: auto;
+}
 footer {
   width: 100%;
   background-color: #6b7a8f;

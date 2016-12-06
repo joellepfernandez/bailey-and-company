@@ -42,12 +42,12 @@ body{
 }
 #container {
   margin: 0 auto;
-  width: 1200px;
+  width: 900px;
 }
 #game {
   background: #dcc7aa;
   border: 5px #f7882f solid;
-  width: 840px;
+  width: 570px;
   height: 500px;
   margin: 0 auto;
   display: inline-block;
@@ -56,7 +56,7 @@ body{
 }
 #console {
   border: 5px #f7882f solid;
-  width: 330px;
+  width: 310px;
   margin: 0 auto;
   height: 500px;
   display: inline-block;
