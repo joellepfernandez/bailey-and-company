@@ -70,7 +70,7 @@ body{
   font-family: 'Roboto Slab', serif;
 }
 #score-history, #timer-countdown {
-  border-top: 1px black dotted;
+  border-top: 1px #000000 dotted;
   margin-top: 14px;
 }
 .player-name {
@@ -112,8 +112,31 @@ button {
   background-color: white;
   border: 1px #f7882f solid;
 }
+h2, h4{
+  font-family: 'Roboto Slab', serif;
+}
+ol, table, th, tr, td {
+  font-family: 'Open Sans Condensed', sans-serif;
+}
 .italicize {
   font-style: italic;
+}
+.bold {
+  font-weight: bold;
+}
+.how-to-play {
+  width: 50%;
+  margin: auto;
+}
+.scoring {
+  width: 10%;
+}
+table {
+  width: 50%;
+}
+table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
 }
 footer {
   background-color: #6b7a8f;
